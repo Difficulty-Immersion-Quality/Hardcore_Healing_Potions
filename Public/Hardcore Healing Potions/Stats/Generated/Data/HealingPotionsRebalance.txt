@@ -1,0 +1,193 @@
+// =============================== Increase price of healing potion, make them cost an action, and increase rarity of stronger potions by a level ===============================
+
+// Healing Potion: increase price by 3x to 30 gold base price (previously 10 gold base price)
+new entry "OBJ_Potion_Healing"
+type "Object"
+using "OBJ_Potion_Healing"
+data "ValueScale" "3"
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+
+// Greater Healing Potion: increase price by 5x to 80 gold base price (previously 16 gold base price)
+new entry "OBJ_Potion_Healing_Greater"
+type "Object"
+using "OBJ_Potion_Healing_Greater"
+data "ValueScale" "5"
+data "Rarity" "Uncommon"
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+
+// Superior Healing Potion: increase price by 10x to 250 gold base price (previously 25 gold base price)
+new entry "OBJ_Potion_Healing_Superior"
+type "Object"
+using "OBJ_Potion_Healing_Superior"
+data "ValueScale" "10"
+data "Rarity" "Rare"
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+
+// Supreme Healing Potion: increase price by 12x to 540 gold base price (previously 45 gold base price)
+new entry "OBJ_Potion_Healing_Supreme"
+type "Object"
+using "OBJ_Potion_Healing_Supreme"
+data "ValueScale" "12"
+data "Rarity" "VeryRare"
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+
+// ============================== Change healing from potions to be heal over time ==============================
+
+new entry "POTION_OF_HEALING"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(1d4+1);IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RemoveStatus(BURNING);IF(HasStatus('POTION_OF_HEALING_GREATER_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_GREATER_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);IF(not HasStatus('POTION_OF_HEALING_GREATER_HOT_TECHNICAL') and not HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL') and not HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "POTION_OF_HEALING_GREATER"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_GREATER"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(2d4+2);IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RemoveStatus(BURNING);IF(HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);IF(not HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL') and not HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_GREATER_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "POTION_OF_HEALING_SUPERIOR"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_SUPERIOR"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(4d4+4);IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RemoveStatus(BURNING);IF(HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);IF(not HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "POTION_OF_HEALING_SUPREME"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_SUPREME"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(5d4+10);IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RemoveStatus(BURNING);ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+// Surface variants
+new entry "GOON_SURFACE_POTION_OF_HEALING"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(1d4+1);RemoveStatus(BURNING);IF(HasStatus('POTION_OF_HEALING_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_GREATER_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_GREATER_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "GOON_SURFACE_POTION_OF_HEALING_GREATER"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_GREATER"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(2d4+2);RemoveStatus(BURNING);IF(HasStatus('POTION_OF_HEALING_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_GREATER_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_GREATER_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "GOON_SURFACE_POTION_OF_HEALING_SUPERIOR"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_SUPERIOR"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(4d4+4);RemoveStatus(BURNING);IF(HasStatus('POTION_OF_HEALING_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_GREATER_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_GREATER_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "GOON_SURFACE_POTION_OF_HEALING_SUPREME"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_SUPREME"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(5d4+10);RemoveStatus(BURNING);IF(HasStatus('POTION_OF_HEALING_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_GREATER_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_GREATER_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL,100,2);IF(HasStatus('POTION_OF_HEALING_SUPREME_HOT_TECHNICAL')):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT_TECHNICAL,100,2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+// ============================== Technical statuses for the HoT ==============================
+
+new entry "POTION_OF_HEALING_HOT_TEMPLATE"
+type "StatusData"
+data "StatusType" "BOOST"
+data "Description" "hcd8603aag65e7g44ceg85a4g3ccc8dbf4261;1"
+data "StackId" "POTION_OF_HEALING_HOT_TECHNICAL"
+data "StackType" "Overwrite"
+data "StatusPropertyFlags" "DisableOverhead"
+data "TickType" "EndTurn"
+data "RemoveConditions" "HasStatus('POTION_OF_HEALING_HOT_HEAL_CHECK')"
+data "RemoveEvents" "OnStatusApplied"
+
+new entry "POTION_OF_HEALING_HOT_TECHNICAL"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_HOT_TEMPLATE"
+data "DisplayName" "h3aad8328ge491g45d5ga1a2g5aba1bd4fc7f;1"
+data "DescriptionParams" "RegainHitPoints(1d4);RegainHitPoints(1)"
+data "Icon" "Item_CONS_Potion_Healing_A"
+data "StackPriority" "1"
+data "TickFunctors" "IF(Combat()):ApplyStatus(POTION_OF_HEALING_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_HOT,100,0)"
+
+new entry "POTION_OF_HEALING_GREATER_HOT_TECHNICAL"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_HOT_TEMPLATE"
+data "DisplayName" "h7479d2dagdb43g4b51g87e5gd929229bc260;1"
+data "DescriptionParams" "RegainHitPoints(2d4);RegainHitPoints(2)"
+data "Icon" "Item_CONS_Potion_Healing_A_Greater"
+data "StackPriority" "2"
+data "TickFunctors" "IF(Combat()):ApplyStatus(POTION_OF_HEALING_GREATER_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_GREATER_HOT,100,0)"
+
+new entry "POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_HOT_TEMPLATE"
+data "DisplayName" "h2f6401fdg3b42g4b0cgbe7eg5093be3e3ce1;1"
+data "DescriptionParams" "RegainHitPoints(4d4);RegainHitPoints(4)"
+data "Icon" "Item_CONS_Potion_Healing_A_Greater"
+data "StackPriority" "3"
+data "TickFunctors" "IF(Combat()):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT,100,0)"
+
+new entry "POTION_OF_HEALING_SUPREME_HOT_TECHNICAL"
+type "StatusData"
+data "StatusType" "BOOST"
+using "POTION_OF_HEALING_HOT_TEMPLATE"
+data "DisplayName" "h6691b981g72d4g4350g80a4g734176c4d910;1"
+data "DescriptionParams" "RegainHitPoints(5d4);RegainHitPoints(10)"
+data "Icon" "Item_CONS_Potion_Healing_A_Greater"
+data "StackPriority" "4"
+data "TickFunctors" "IF(Combat()):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT,100,0)"
+
+// ============================== Statuses applying the actual delayed heal ==============================
+
+new entry "POTION_OF_HEALING_HOT"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h3aad8328ge491g45d5ga1a2g5aba1bd4fc7f;1"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(1d4+1);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "POTION_OF_HEALING_GREATER_HOT"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h7479d2dagdb43g4b51g87e5gd929229bc260;1"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(2d4+2);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "POTION_OF_HEALING_SUPERIOR_HOT"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h2f6401fdg3b42g4b0cgbe7eg5093be3e3ce1;1"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(4d4+4);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+new entry "POTION_OF_HEALING_SUPREME_HOT"
+type "StatusData"
+data "StatusType" "BOOST"
+data "DisplayName" "h6691b981g72d4g4350g80a4g734176c4d910;1"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "OnApplyFunctors" "IF(not HasStatus('POTION_OF_HEALING_TRACKER') or not Combat()):RegainHitPoints(5d4+10);ApplyStatus(POTION_OF_HEALING_TRACKER,100,1)"
+
+// ============================== Tracker status to ensure the delayed heal won't trigger if another healing potion is drank ==============================
+
+new entry "POTION_OF_HEALING_TRACKER"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "POTION_OF_HEALING_TRACKER"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "TickType" "StartTurn"
+data "OnApplyFunctors" "AI_ONLY:ApplyStatus(POTION_OF_HEALING_TRACKER_NPC,100,2)"
+
+new entry "POTION_OF_HEALING_TRACKER_NPC"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "POTION_OF_HEALING_TRACKER"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
+data "TickType" "StartTurn"
+
+new entry "POTION_OF_HEALING_HOT_HEAL_CHECK"
+type "StatusData"
+data "StatusType" "BOOST"
+data "StackId" "POTION_OF_HEALING_HOT_HEAL_CHECK"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
