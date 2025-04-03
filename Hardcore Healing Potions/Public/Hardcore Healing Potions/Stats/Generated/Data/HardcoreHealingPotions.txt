@@ -5,7 +5,7 @@ new entry "OBJ_Potion_Healing"
 type "Object"
 using "OBJ_Potion_Healing"
 data "ValueScale" "3"
-data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')"
 
 // Greater Healing Potion: increase price by 5x to 80 gold base price (previously 16 gold base price)
 new entry "OBJ_Potion_Healing_Greater"
@@ -13,7 +13,7 @@ type "Object"
 using "OBJ_Potion_Healing_Greater"
 data "ValueScale" "5"
 data "Rarity" "Uncommon"
-data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')"
 
 // Superior Healing Potion: increase price by 10x to 250 gold base price (previously 25 gold base price)
 new entry "OBJ_Potion_Healing_Superior"
@@ -21,7 +21,7 @@ type "Object"
 using "OBJ_Potion_Healing_Superior"
 data "ValueScale" "10"
 data "Rarity" "Rare"
-data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')"
 
 // Supreme Healing Potion: increase price by 12x to 540 gold base price (previously 45 gold base price)
 new entry "OBJ_Potion_Healing_Supreme"
@@ -29,7 +29,7 @@ type "Object"
 using "OBJ_Potion_Healing_Supreme"
 data "ValueScale" "12"
 data "Rarity" "VeryRare"
-data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')
+data "UseConditions" "not IsSummonWithoutMouth() and CanRegainHP(HealingType.Living,context.Source) and not HasStatus('POTION_OF_HEALING_TRACKER_NPC')"
 
 // ============================== Change healing from potions to be heal over time ==============================
 
@@ -107,8 +107,9 @@ data "DisplayName" "h3aad8328ge491g45d5ga1a2g5aba1bd4fc7f;1"
 data "DescriptionParams" "RegainHitPoints(1d4);RegainHitPoints(1)"
 data "Icon" "Item_CONS_Potion_Healing_A"
 data "StackPriority" "1"
-data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
-// data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_HOT,100,0)"
+// data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_HOT,100,0);IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "StatusEffect" "4425d0c5-277f-4714-bcdd-b2e97eb615ec"
 
 new entry "POTION_OF_HEALING_GREATER_HOT_TECHNICAL"
 type "StatusData"
@@ -118,8 +119,9 @@ data "DisplayName" "h7479d2dagdb43g4b51g87e5gd929229bc260;1"
 data "DescriptionParams" "RegainHitPoints(2d4);RegainHitPoints(2)"
 data "Icon" "Item_CONS_Potion_Healing_A_Greater"
 data "StackPriority" "2"
-data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_GREATER_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
-// data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_GREATER_HOT,100,0)"
+// data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_GREATER_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_GREATER_HOT,100,0);IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "StatusEffect" "4425d0c5-277f-4714-bcdd-b2e97eb615ec"
 
 new entry "POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL"
 type "StatusData"
@@ -129,8 +131,9 @@ data "DisplayName" "h2f6401fdg3b42g4b0cgbe7eg5093be3e3ce1;1"
 data "DescriptionParams" "RegainHitPoints(4d4);RegainHitPoints(4)"
 data "Icon" "Item_CONS_Potion_Healing_A_Greater"
 data "StackPriority" "3"
-data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
-// data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT,100,0)"
+// data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_SUPERIOR_HOT,100,0);IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "StatusEffect" "4425d0c5-277f-4714-bcdd-b2e97eb615ec"
 
 new entry "POTION_OF_HEALING_SUPREME_HOT_TECHNICAL"
 type "StatusData"
@@ -140,8 +143,9 @@ data "DisplayName" "h6691b981g72d4g4350g80a4g734176c4d910;1"
 data "DescriptionParams" "RegainHitPoints(5d4);RegainHitPoints(10)"
 data "Icon" "Item_CONS_Potion_Healing_A_Greater"
 data "StackPriority" "4"
-data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_SUPREME_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
-// data "OnRemoveFunctors" "IF(not Combat()):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT,100,0)"
+// data "TickFunctors" "ApplyStatus(POTION_OF_HEALING_SUPREME_HOT,100,0);ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "OnRemoveFunctors" "IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_SUPREME_HOT,100,0);IF(RemoveCause(StatusRemoveCause.TimeOut)):ApplyStatus(POTION_OF_HEALING_HOT_HEAL_CHECK,100,0)"
+data "StatusEffect" "4425d0c5-277f-4714-bcdd-b2e97eb615ec"
 
 // ============================== Statuses applying the actual delayed heal ==============================
 
