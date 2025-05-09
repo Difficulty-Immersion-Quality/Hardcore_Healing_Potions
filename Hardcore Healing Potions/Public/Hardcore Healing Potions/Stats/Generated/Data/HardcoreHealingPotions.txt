@@ -43,6 +43,7 @@ data "OnApplyFunctors" "IF(not Combat()):ApplyStatus(GOON_POTION_OF_HEALING_NOT_
 new entry "GOON_POTION_OF_HEALING_NOT_COMBAT"
 type "StatusData"
 data "StatusType" "BOOST"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
 data "OnApplyFunctors" "RegainHitPoints(2d4+2)"
 
 new entry "POTION_OF_HEALING_GREATER"
@@ -55,6 +56,7 @@ data "OnApplyFunctors" "IF(not Combat()):ApplyStatus(GOON_POTION_OF_HEALING_GREA
 new entry "GOON_POTION_OF_HEALING_GREATER_NOT_COMBAT"
 type "StatusData"
 data "StatusType" "BOOST"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
 data "OnApplyFunctors" "RegainHitPoints(4d4+4)"
 
 new entry "POTION_OF_HEALING_SUPERIOR"
@@ -67,6 +69,7 @@ data "OnApplyFunctors" "IF(not Combat()):ApplyStatus(GOON_POTION_OF_HEALING_SUPE
 new entry "GOON_POTION_OF_HEALING_SUPERIOR_NOT_COMBAT"
 type "StatusData"
 data "StatusType" "BOOST"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
 data "OnApplyFunctors" "RegainHitPoints(8d4+8)"
 
 new entry "POTION_OF_HEALING_SUPREME"
@@ -79,6 +82,7 @@ data "OnApplyFunctors" "IF(not Combat()):ApplyStatus(GOON_POTION_OF_HEALING_SUPR
 new entry "GOON_POTION_OF_HEALING_SUPREME_NOT_COMBAT"
 type "StatusData"
 data "StatusType" "BOOST"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;DisablePortraitIndicator"
 data "OnApplyFunctors" "RegainHitPoints(10d4+20)"
 
 // Surface variants
