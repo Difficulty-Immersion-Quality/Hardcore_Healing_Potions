@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<!-- GameObjects: "CONS_Potion_Healing_A", "CONS_Potion_Healing_A_Greater", "CONS_Potion_Healing_A_Superior", "CONS_Potion_Healing_A_Supreme" --> <content contentuid="h243d6f2eg13efg4a21g8a69gfb3298ed5362" version="1">你每回合可以从治疗药水的效果中受益一次。你立即恢复 [1] 点生命值，额外恢复 [2] 点，并移除&lt;LSTag Type="Status" Tooltip="BURNING"&gt;燃烧&lt;/LSTag&gt;状态。你需要时间消化治疗药水的疗效，如果药水是口服的，你在下一回合结束时将额外恢复 [1] 点和 [2] 点生命值。&lt;br&gt;&lt;br&gt;在完全消化之前消耗的治疗药水之前饮用另一瓶治疗药水，将覆盖并延迟此该额外治疗的效果。&lt;br&gt;在战斗外，你的副交感神经系统允许你无限制地消化治疗药水。</content>
+	<!-- "POTION_OF_HEALING_HOT_TECHNICAL",  --> <content contentuid="h3aad8328ge491g45d5ga1a2g5aba1bd4fc7f" version="1">治疗药水：延迟治疗</content>
+	<!-- "POTION_OF_HEALING_GREATER_HOT_TECHNICAL",  --> <content contentuid="h7479d2dagdb43g4b51g87e5gd929229bc260" version="1">高等治疗药水：延迟治疗</content>
+	<!-- "POTION_OF_HEALING_SUPERIOR_HOT_TECHNICAL",  --> <content contentuid="h2f6401fdg3b42g4b0cgbe7eg5093be3e3ce1" version="1">特效治疗药水：延迟治疗</content>
+	<!-- "POTION_OF_HEALING_SUPREME_HOT_TECHNICAL",  --> <content contentuid="h6691b981g72d4g4350g80a4g734176c4d910" version="1">极效治疗药水：延迟治疗</content>
+	<!-- "POTION_OF_HEALING_HOT_TEMPLATE" --> <content contentuid="hcd8603aag65e7g44ceg85a4g3ccc8dbf4261" version="1">你将恢复 [1] 点生命值，并在下一回合结束时额外恢复 [2] 点。&lt;br&gt;&lt;br&gt;在完全消化之前的治疗药水之前饮用另一瓶治疗药水，将覆盖并延迟此额外治疗的效果。&lt;br&gt;在战斗外，你的副交感神经系统允许你无限制地消化治疗药水。</content>
+</contentList>

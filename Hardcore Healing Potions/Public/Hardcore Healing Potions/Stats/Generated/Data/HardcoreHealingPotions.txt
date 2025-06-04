@@ -1,5 +1,5 @@
 // =============================== Increase price of healing potion, make them cost an action, and increase rarity of stronger potions by a level ===============================
-
+//TODO: Are these increases a little extreme?
 // Healing Potion: increase price by 3x to 30 gold base price (previously 10 gold base price)
 new entry "OBJ_Potion_Healing"
 type "Object"
